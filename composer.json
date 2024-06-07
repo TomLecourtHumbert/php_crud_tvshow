@@ -14,5 +14,7 @@
             "email": "tom.lecourt-humbert@etudiant.univ-reims.fr"
         }
     ],
-    "require": {}
+    "require": {
+        "ext-pdo": "*"
+    }
 }
