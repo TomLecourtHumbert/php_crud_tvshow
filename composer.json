@@ -1,0 +1,18 @@
+{
+    "name": "leco0129/sae2-01",
+    "description": "Développement d'une application Web de consultation et modification de séries télé",
+    "type": "project",
+    "license": "Copyleft",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tom Lecourt-Humbert",
+            "email": "tom.lecourt-humbert@etudiant.univ-reims.fr"
+        }
+    ],
+    "require": {}
+}
