@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Collection\SeasonCollection;
+use Entity\Collection\TvShowCollection;
 use Entity\Exception\EntityNotFoundException;
 use PDO;
 
@@ -60,7 +62,6 @@ class TvShow
             SELECT id, name
             FROM tvshow
             WHERE id = ?
-            ORDER BY name
         SQL
         );
         $stmt->execute([$id]);
@@ -70,5 +71,15 @@ class TvShow
             throw new EntityNotFoundException();
         }
         return $tvshow;
+    }
+
+    /**
+     * Retourne toutes les séries par ordre alphabétique
+     *
+     * @return array
+     */
+    public function getSeason(): array
+    {
+        return SeasonCollection::findByTvId($this->getId());
     }
 }

@@ -19,8 +19,9 @@ class TvShowCollection
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT id, name, originName, homepage, overview, posterId
+            SELECT id, name, originalName, homepage, overview, posterId
             FROM tvshow
+            ORDER BY name
         SQL
         );
         $stmt->execute();
