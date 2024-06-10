@@ -47,6 +47,12 @@ class TvShow
         return $this->posterId;
     }
 
+    /**
+     * Retourne la série ayant comme identifiant celui donné en paramètre
+     *
+     * @param int $id
+     * @return TvShow
+     */
     public static function findById(int $id): TvShow
     {
         $stmt = MyPdo::getInstance()->prepare(
