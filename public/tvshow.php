@@ -16,6 +16,8 @@ $tvshowId = $_GET["tvshowId"];
 
 $webPage = new AppWebPage();
 
+$webPage->appendCSSUrl("css/tvshow.css");
+
 try {
     $tvshow = TvShow::findById((int)$tvshowId);
     $webPage->setTitle("Séries TV : {$tvshow->getName()}");
@@ -25,14 +27,14 @@ try {
     $showPosterId = $tvshow->getPosterId();
     $desc = $tvshow->getOverview();
     $showposter = "<img src='poster.php?posterId=$showPosterId' alt='posterShow'/>";
-    $webPage->appendContent("<p>$showposter <div>$nameShow</div><p><div>$originalNameShow</div><p><div>$desc</div>");
+    $webPage->appendContent("<div id='serie'><p>$showposter</p><div id='info_serie'><p>$nameShow</p><p>(Nom original : $originalNameShow)</p><p>$desc</p></div></div>");
 
     $seasons = $tvshow->getSeason();
 
     foreach ($seasons as $season) {
         $poster = Poster::findById($season->getPosterId());
         $nameSeason = $season->getName();
-        $webPage->appendContent("<p><element><div><img src='poster.php?posterId={$poster->getId()}' alt='posterSeason'/> </div><div>$nameSeason</div></element>");
+        $webPage->appendContent("<div class='season'><img src='poster.php?posterId={$poster->getId()}' alt='posterSeason'/><p class='info_season'>$nameSeason</p></div>");
     }
 
     echo $webPage->toHTML();
