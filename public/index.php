@@ -15,10 +15,10 @@ $shows = TvShowCollection::findAll();
 
 foreach ($shows as $show) {
     $nomShow = $show->getName();
-    $posterId = $show->getPosterId();
+    $posterId = !empty($show->getPosterId()) ? $show->getPosterId() : null;
     $desc = $show->getOverview();
     $poster = "<img src='poster.php?posterId=$posterId' alt='image'/>";
-    $webPage->appendContent("<a href='poster.php?posterId={$show->getPosterId()}' class='serie'><p>$poster</p><div class='info_serie'><p>$nomShow</p><p>$desc</p></div></a>");
+    $webPage->appendContent("<a href='tvshow.php?tvshowId={$show->getId()}' class='serie'><p>$poster</p><div class='info_serie'><p>$nomShow</p><p>$desc</p></div></a>");
 }
 
 echo $webPage->toHTML();
