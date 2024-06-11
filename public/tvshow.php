@@ -21,6 +21,16 @@ try {
     $tvshow = TvShow::findById((int)$tvshowId);
     $webPage->setTitle("Séries TV : {$tvshow->getName()}");
 
+    $webPage->appendContent("<elements class='menu'>
+    <form method='post' action='admin/tvshow-form.php?tvShowId=$tvshowId'>
+    <button type='submit'>Modifier</button>
+    <p></p>
+    </form>
+    <form method='post' action='admin/tvshow-delete.php?tvShowId=$tvshowId'>
+    <button type='submit'>Supprimer</button>
+    </form>
+    </elements>");
+
     $nameShow = $tvshow->getName();
     $originalNameShow = $tvshow->getOriginalName();
     $showPosterId = !empty($tvshow->getPosterId()) ? $tvshow->getPosterId() : null;

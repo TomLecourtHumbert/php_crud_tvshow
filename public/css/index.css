@@ -42,7 +42,7 @@ body {
 
     .serie {
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         align-items: center;
         margin: 10px;
         background-color: burlywood;
@@ -51,7 +51,7 @@ body {
     }
 
     .serie:nth-child(2n) {
-        flex-direction: row-reverse;
+        flex-direction: row;
     }
 }
 
