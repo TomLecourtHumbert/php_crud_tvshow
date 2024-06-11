@@ -12,14 +12,14 @@ use PDO;
 
 class TvShow
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $originalName;
     private string $homepage;
     private string $overview;
-    private int $posterId;
+    private ?int $posterId;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -44,9 +44,39 @@ class TvShow
         return $this->overview;
     }
 
-    public function getPosterId(): int
+    public function getPosterId(): ?int
     {
         return $this->posterId;
+    }
+
+    private function setId(?int $id): TvShow
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName(string $name): TvShow
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setOriginalName(string $originalName): TvShow
+    {
+        $this->originalName = $originalName;
+        return $this;
+    }
+
+    public function setHomepage(string $homepage): TvShow
+    {
+        $this->homepage = $homepage;
+        return $this;
+    }
+
+    public function setOverview(string $overview): TvShow
+    {
+        $this->overview = $overview;
+        return $this;
     }
 
     /**
@@ -81,5 +111,65 @@ class TvShow
     public function getSeason(): array
     {
         return SeasonCollection::findByTvId($this->getId());
+    }
+
+    public function delete(): TvShow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            DELETE FROM tvshow
+            WHERE id = ?
+        SQL
+        );
+        $stmt->execute([$this->getId()]);
+        $this->setId(null);
+        return $this;
+    }
+
+    public function update(): TvShow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            UPDATE tvshow
+            SET name = ?, originalName = ?, homepage = ?, overview = ?
+            WHERE id = ?
+        SQL
+        );
+        $stmt->execute([$this->getName(),$this->getOriginalName(),$this->getHomepage(),$this->getOverview(),$this->getId()]);
+        return $this;
+    }
+
+    public static function create(string $name, ?int $id = null, string $originalName, string $homepage, string $overview): TvShow
+    {
+        $tv = new TvShow();
+        $tv->setName($name);
+        $tv->setId($id);
+        $tv->setOriginalName($originalName);
+        $tv->setHomepage($homepage);
+        $tv->setOverview($overview);
+        return $tv;
+    }
+
+    protected function insert(): TvShow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            INSERT INTO tvshow(name, originalName, homepage, overview)
+            VALUES(?, ?, ?, ?)
+        SQL
+        );
+        $stmt->execute([$this->getName(),$this->getOriginalName(),$this->getHomepage(),$this->getOverview()]);
+        $this->setId((int)MyPDO::getInstance()->lastInsertId());
+        return $this;
+    }
+
+    public function save(): TvShow
+    {
+        if ($this->getId() === null) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+        return $this;
     }
 }

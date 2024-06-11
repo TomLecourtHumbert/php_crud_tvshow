@@ -9,6 +9,12 @@ $webPage = new AppWebPage();
 
 $webPage->setTitle("Séries TV");
 
+$webPage->appendContent("<div class='menu'>
+<form method='post' action='admin/tvshow-form.php'>
+<button type='submit'>Ajouter</button>
+</form>
+</div>");
+
 $webPage->appendCSSUrl("css/index.css");
 
 $shows = TvShowCollection::findAll();
