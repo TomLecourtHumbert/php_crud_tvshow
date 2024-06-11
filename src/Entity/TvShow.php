@@ -103,6 +103,30 @@ class TvShow
         return $tvshow;
     }
 
+
+    /**
+     * @param int $genreId
+     * @return TvShow[]
+     */
+    public static function findByGenreId(int $genreId): array
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+            SELECT tvshow.id, tvshow.name, tvshow.originalName, tvshow.homepage, tvshow.overview, tvshow.posterId, genre.id, genre.name
+            FROM tvshow
+            JOIN tvshow_genre ON (tvshow_genre.tvShowId = tvshow.id)
+            JOIN genre on (genre.id = tvshow_genre.genreId)
+            WHERE genre.id = ?
+        SQL
+        );
+        $stmt->execute([$genreId]);
+        $tvshows = $stmt->fetchAll(PDO::FETCH_CLASS, TvShow::class);
+        if ($tvshows === false) {
+            throw new EntityNotFoundException();
+        }
+        return $tvshows;
+    }
+
     /**
      * Retourne toutes les séries par ordre alphabétique
      *
