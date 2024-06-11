@@ -97,10 +97,10 @@ button {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 10px;
-        background-color: burlywood;
-        padding: 0 10px 0 10px;
-        width: 98%;
+    }
+
+    .serie:nth-child(2n) {
+        flex-direction: column;
     }
 
     .info_serie {

@@ -36,7 +36,7 @@ try {
     $showPosterId = !empty($tvshow->getPosterId()) ? $tvshow->getPosterId() : null;
     $desc = $tvshow->getOverview();
     $showposter = "<img src='poster.php?posterId=$showPosterId' alt='posterShow'/>";
-    $webPage->appendContent("<div id='serie'><p>$showposter</p><div id='info_serie'><p>$nameShow</p><p>(Nom original : $originalNameShow)</p><p>$desc</p></div></div>");
+    $webPage->appendContent("<div id='serie'><p>$showposter</p><div id='info_serie'><p class='name'>$nameShow</p><p class='name'>(Nom original : $originalNameShow)</p><p>$desc</p></div></div>");
 
     $seasons = $tvshow->getSeason();
 
@@ -45,6 +45,8 @@ try {
         $nameSeason = $season->getName();
         $webPage->appendContent("<a class='season' href='episode.php?seasonId={$season->getId()}'><img src='poster.php?posterId=$posterId' alt='posterSeason'/><p class='info_season'>$nameSeason</p></a>");
     }
+
+    $webPage->appendContent("<a id='home' href='index.php'>Retour à la page d'acceuil</a>");
 
     echo $webPage->toHTML();
 } catch(EntityNotFoundException $e) {
