@@ -52,7 +52,7 @@ button {
 
 .serie {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     margin: 10px;
     background-color: burlywood;
@@ -61,7 +61,7 @@ button {
 }
 
 .serie:nth-child(2n) {
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 .serie > * {

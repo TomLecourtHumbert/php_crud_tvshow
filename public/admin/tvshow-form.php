@@ -9,18 +9,19 @@ use Html\AppWebPage;
 use Html\Form\TvShowForm;
 
 try {
-    if (!isset($_GET["tvshowId"])) {
+    if (!isset($_GET["tvShowId"])) {
         $show = new TvShowForm();
     } else {
-        if (!ctype_digit($_GET["tvshowId"])) {
+        if (!ctype_digit($_GET["tvShowId"])) {
             throw new ParameterException();
         }
-        $showId = $_GET["tvshowId"];
+        $showId = $_GET["tvShowId"];
         $showF = TvShow::findById((int)$showId);
         $show = new TvShowForm($showF);
     }
     $webPage = new AppWebPage();
     $webPage->setTitle("Enregistrer un Show");
+    $webPage->appendCSSUrl("../css/form.css");
     $webPage->appendContent("{$show->getHtmlForm("tvshow-save.php")}");
     echo $webPage->toHTML();
 } catch (ParameterException) {
