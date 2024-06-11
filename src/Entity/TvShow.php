@@ -112,7 +112,7 @@ class TvShow
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT tvshow.id, tvshow.name, tvshow.originalName, tvshow.homepage, tvshow.overview, tvshow.posterId, genre.id, genre.name
+            SELECT tvshow.id, tvshow.name, tvshow.originalName, tvshow.homepage, tvshow.overview, tvshow.posterId
             FROM tvshow
             JOIN tvshow_genre ON (tvshow_genre.tvShowId = tvshow.id)
             JOIN genre on (genre.id = tvshow_genre.genreId)
