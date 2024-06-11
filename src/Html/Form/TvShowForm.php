@@ -21,7 +21,7 @@ class TvShowForm
     public function getHtmlForm(string $action): string
     {
         $html = <<<HTML
-            <form method="post" action="$action">
+            <form method="POST" action="$action">
                 <input type="hidden" name="id" value="{$this->tvshow?->getId()}" />
                 <label>Name
                     <input type="text" name="name" value="{$this->escapeString($this->tvshow?->getName())}" required>
