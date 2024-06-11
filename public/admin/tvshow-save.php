@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Entity\Exception\ParameterException;
 use Entity\TvShow;
 
-try{
+try {
     if (empty($_POST["name"]) || empty($_POST["homepage"]) || empty($_POST["originalName"]) || empty($_POST["overview"])) {
         throw new ParameterException();
     }

@@ -6,7 +6,6 @@ use Entity\Exception\EntityNotFoundException;
 use Entity\Exception\ParameterException;
 use Entity\Poster;
 
-
 try {
     if (!isset($_GET["posterId"]) || empty($_GET["posterId"])) {
         header('Content-Type: image/png');

@@ -18,7 +18,7 @@
         "ext-pdo": "*"
     },
     "scripts": {
-        "start:linux": [
+        "start": [
             "Composer\\Config::disableProcessTimeout",
             "bin/run-server.sh"
         ],
