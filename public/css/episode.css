@@ -71,6 +71,10 @@ body {
     border-width: thin;
 }
 
+#home {
+    margin: 10px;
+}
+
 .footer {
     display: flex;
     flex-direction: column;

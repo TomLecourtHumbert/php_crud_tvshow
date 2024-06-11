@@ -39,6 +39,8 @@ try {
         $webPage->appendContent("<div class='info_episode'><p>$numEpisode - $nameEpisode<p>$descEpisode</p></div>");
     }
 
+    $webPage->appendContent("<a id='home' href='index.php'>Retour à la page d'acceuil</a>");
+
     echo $webPage->toHTML();
 } catch(EntityNotFoundException $e) {
     header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");

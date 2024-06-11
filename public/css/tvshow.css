@@ -56,8 +56,12 @@ body {
     flex-grow: 1;
 }
 
-.names {
+#info_serie > * {
+}
+
+.name {
     text-align: right;
+    font-size: 25px;
 }
 
 .season {
@@ -75,6 +79,10 @@ body {
 .info_season {
     display: flex;
     flex-direction: column;
+    margin: 10px;
+}
+
+#home {
     margin: 10px;
 }
 
@@ -101,6 +109,14 @@ body {
         flex-direction: column;
         align-items: center;
         margin: 10px;
+    }
+
+    #info_serie {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        flex-grow: 1;
     }
 
     #serie {
