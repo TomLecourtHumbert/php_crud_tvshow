@@ -2,29 +2,45 @@
 
 declare(strict_types=1);
 
+use Entity\Collection\GenreCollection;
 use Entity\Collection\TvShowCollection;
 use Html\AppWebPage;
 
 $webPage = new AppWebPage();
 
-$webPage->setTitle("Séries TV");
-
-$webPage->appendContent("<div class='menu'>
-<form method='post' action='admin/tvshow-form.php'>
-<button type='submit'>Ajouter</button>
-</form>
-</div>");
-
 $webPage->appendCSSUrl("css/index.css");
 
-$shows = TvShowCollection::findAll();
+$webPage->setTitle("Séries TV");
 
-foreach ($shows as $show) {
-    $nomShow = $show->getName();
-    $posterId = !empty($show->getPosterId()) ? $show->getPosterId() : null;
-    $desc = $show->getOverview();
-    $poster = "<img src='poster.php?posterId=$posterId' alt='image'/>";
-    $webPage->appendContent("<a href='tvshow.php?tvshowId={$show->getId()}' class='serie'><p>$poster</p><div class='info_serie'><p>$nomShow</p><p>$desc</p></div></a>");
+$genres = GenreCollection::findAll();
+
+$webPage->appendContent("<div class='filter'>");
+
+$webPage->appendContent("<form action='index.php' method='get'><button type='submit'>Tous</button></form>");
+
+foreach ($genres as $genre) {
+    $webPage->appendContent("<form action='index.php'><button type='submit' name='genreId' value='{$genre->getId()}'>{$genre->getName()}</button></form>");
 }
 
-echo $webPage->toHTML();
+$webPage->appendContent("</div>");
+if (!$_GET) {
+    $webPage->appendContent("<div class='menu'>
+    <form method='post' action='admin/tvshow-form.php'>
+    <button type='submit'>Ajouter une série</button>
+    </form>
+    </div>");
+
+    $shows = TvShowCollection::findAll();
+
+    foreach ($shows as $show) {
+        $nomShow = $show->getName();
+        $posterId = !empty($show->getPosterId()) ? $show->getPosterId() : null;
+        $desc = $show->getOverview();
+        $poster = "<img src='poster.php?posterId=$posterId' alt='image'/>";
+        $webPage->appendContent("<a href='tvshow.php?tvshowId={$show->getId()}' class='serie'><p>$poster</p><div class='info_serie'><p>$nomShow</p><p>$desc</p></div></a>");
+    }
+
+    echo $webPage->toHTML();
+} else {
+
+}

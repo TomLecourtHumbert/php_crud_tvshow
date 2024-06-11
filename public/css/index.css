@@ -38,21 +38,30 @@ body {
     margin: 10px;
 }
 
-@media (min-width: 811px) {
+.filter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-    .serie {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        margin: 10px;
-        background-color: burlywood;
-        padding: 0 10px 0 10px;
-        width: 98%;
-    }
+button {
+    margin: 10px;
+}
 
-    .serie:nth-child(2n) {
-        flex-direction: row;
-    }
+.serie {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 10px;
+    background-color: burlywood;
+    padding: 0 10px 0 10px;
+    width: 98%;
+}
+
+.serie:nth-child(2n) {
+    flex-direction: row;
 }
 
 .serie > * {
