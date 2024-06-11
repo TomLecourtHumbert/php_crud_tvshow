@@ -16,17 +16,19 @@ $seasonId = $_GET["seasonId"];
 
 $webPage = new AppWebPage();
 
+$webPage->appendCSSUrl("css/episode.css");
+
 try {
     $season = Season::findById((int)$seasonId);
     $tvshow = TvShow::findById($season->getTvShowId());
-    $webPage->setTitle("Séries TV : {$tvshow->getName()} <p> {$season->getName()}");
+    $webPage->setTitle("Séries TV : {$tvshow->getName()} {$season->getName()}");
 
     $nameShow = $tvshow->getName();
     $nameSeason = $season->getName();
     $seasonPosterId = $season->getPosterId();
 
     $seasonPoster = "<img src='poster.php?posterId=$seasonPosterId' alt='posterShow'/>";
-    $webPage->appendContent("<div id='serie'><p>$seasonPoster</p><div id='info_serie'><p>$nameShow</p><p>$nameSeason</p></div></div>");
+    $webPage->appendContent("<div id='season'><p>$seasonPoster</p><div id='info_season'><a href='tvshow.php?tvshowId={$tvshow->getId()}'><p>$nameShow</p></a><p>$nameSeason</p></div></div>");
 
     $episodes = $season->getEpisode();
 
@@ -34,7 +36,7 @@ try {
         $numEpisode = $episode->getEpisodeNumber();
         $nameEpisode = $episode->getName();
         $descEpisode = $episode->getOverview();
-        $webPage->appendContent("<p class='info_episode'>$numEpisode - $nameEpisode <p> $descEpisode</p></a>");
+        $webPage->appendContent("<div class='info_episode'><p>$numEpisode - $nameEpisode<p>$descEpisode</p></div>");
     }
 
     echo $webPage->toHTML();
