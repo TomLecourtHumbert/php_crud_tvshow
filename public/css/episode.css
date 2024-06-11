@@ -16,7 +16,6 @@ body {
     margin: 10px;
     border-style: solid;
     border-width: thin;
-
 }
 
 .content {
@@ -37,7 +36,7 @@ body {
     margin: 10px;
 }
 
-#serie {
+#season {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -49,35 +48,28 @@ body {
     border-width: thin;
 }
 
-#info_serie {
+#info_season {
     display: flex;
     flex-direction: column;
     margin: 10px;
     flex-grow: 1;
 }
 
-.names {
+#info_season > * {
     text-align: right;
+    font-size: 40px;
 }
 
-.season {
+.info_episode {
     display: flex;
-    flex-direction: row;
-    margin: 10px;
-    padding: 10px;
+    flex-direction: column;
     width: 98%;
     background-color: burlywood;
-    align-items: center;
+    margin: 10px;
+    padding: 10px;
     border-style: solid;
     border-width: thin;
 }
-
-.info_season {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-}
-
 
 .footer {
     display: flex;
@@ -91,21 +83,20 @@ body {
 }
 
 @media only screen and (max-width: 810px) {
-
-    .header > * {
+    .header {
         text-align: center;
     }
 
-    .list {
+    #season {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 10px;
     }
 
-    #serie {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    #info_season > * {
+        text-align: center;
+        font-size: 30px;
     }
+
 }
