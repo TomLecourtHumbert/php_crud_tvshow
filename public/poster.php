@@ -6,8 +6,14 @@ use Entity\Exception\EntityNotFoundException;
 use Entity\Exception\ParameterException;
 use Entity\Poster;
 
+
 try {
-    if (!isset($_GET["posterId"]) || !ctype_digit($_GET["posterId"])) {
+    if (!isset($_GET["posterId"]) || empty($_GET["posterId"])) {
+        header('Content-Type: image/png');
+        header('Location: http://cutrona/but/s2/sae2-01/ressources/public/img/default.png');
+        exit();
+    }
+    if (!ctype_digit($_GET["posterId"])) {
         throw new ParameterException();
     }
     $posterId = $_GET["posterId"];

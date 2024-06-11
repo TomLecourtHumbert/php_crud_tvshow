@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Entity\Exception\EntityNotFoundException;
-use Entity\Poster;
 use Entity\TvShow;
 use Html\AppWebPage;
 
@@ -24,7 +23,7 @@ try {
 
     $nameShow = $tvshow->getName();
     $originalNameShow = $tvshow->getOriginalName();
-    $showPosterId = $tvshow->getPosterId();
+    $showPosterId = !empty($tvshow->getPosterId()) ? $tvshow->getPosterId() : null;
     $desc = $tvshow->getOverview();
     $showposter = "<img src='poster.php?posterId=$showPosterId' alt='posterShow'/>";
     $webPage->appendContent("<div id='serie'><p>$showposter</p><div id='info_serie'><p>$nameShow</p><p>(Nom original : $originalNameShow)</p><p>$desc</p></div></div>");
@@ -32,9 +31,9 @@ try {
     $seasons = $tvshow->getSeason();
 
     foreach ($seasons as $season) {
-        $poster = Poster::findById($season->getPosterId());
+        $posterId = !empty($season->getPosterId()) ? $season->getPosterId() : null;
         $nameSeason = $season->getName();
-        $webPage->appendContent("<div class='season'><img src='poster.php?posterId={$poster->getId()}' alt='posterSeason'/><p class='info_season'>$nameSeason</p></div>");
+        $webPage->appendContent("<a class='season' href='episode.php?seasonId={$season->getId()}'><img src='poster.php?posterId=$posterId' alt='posterSeason'/><p class='info_season'>$nameSeason</p></a>");
     }
 
     echo $webPage->toHTML();
